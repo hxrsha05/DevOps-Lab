@@ -1,24 +1,13 @@
 trigger:
 - main
 
-schedules:
-- cron: "24 16 * * 3"
-  displayName: Weekly CodeQL Scan
-  branches:
-    include:
-    - main
-  always: true
-
 pool:
-  name: Default   # self-hosted agent
+  name: Default
 
 steps:
-- checkout: self
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
 
-- task: CodeQLInitialize@0
-  inputs:
-    languages: java
-
-- task: CodeQLAutobuild@0
-
-- task: CodeQLAnalyze@0
+- script: |
+    echo Pipeline running on self-hosted agent
+  displayName: 'Run multi-line script'
