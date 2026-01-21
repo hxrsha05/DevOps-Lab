@@ -4,10 +4,22 @@ trigger:
 pool:
   name: Default
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+- stage: Build
+  displayName: 'Build Stage'
+  jobs:
+  - job: BuildJob
+    displayName: 'Build Job'
+    steps:
+    - script: mvn clean compile
+      displayName: 'Compile using Maven'
 
-- script: |
-    echo Pipeline running on self-hosted agent
-  displayName: 'Run multi-line script'
+- stage: Test
+  displayName: 'Test Stage'
+  dependsOn: Build
+  jobs:
+  - job: TestJob
+    displayName: 'Test Job'
+    steps:
+    - script: mvn test
+      displayName: 'Run Regression Tests'
