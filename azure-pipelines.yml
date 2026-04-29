@@ -2,8 +2,24 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: Default
 
-steps:
-- script: mvn clean compile
-  displayName: 'Build using Maven'
+stages:
+- stage: Build
+  displayName: 'Build Stage'
+  jobs:
+  - job: BuildJob
+    displayName: 'Build Job'
+    steps:
+    - script: mvn clean compile
+      displayName: 'Compile using Maven'
+
+- stage: Test
+  displayName: 'Test Stage'
+  dependsOn: Build
+  jobs:
+  - job: TestJob
+    displayName: 'Test Job'
+    steps:
+    - script: mvn test
+      displayName: 'Run Regression Tests'
