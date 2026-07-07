@@ -1,4 +1,4 @@
-# ⚙️ DevOps Lab – Azure Pipeline with Self-Hosted Agent
+# DevOps Lab – Azure Pipeline with Self-Hosted Agent
 
 > CI pipeline using Azure DevOps with a self-hosted agent that builds and tests a Java project using Apache Maven.
 
